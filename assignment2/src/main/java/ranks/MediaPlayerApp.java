@@ -86,7 +86,7 @@ public class MediaPlayerApp extends Application {
         root.setRight(buildPlaylistPanel());
         root.setBottom(buildControlBar());
 
-        // Background layers: optional wallpaper image plus a vignette on top.
+        // Background layers
         Region background = new Region();
         background.getStyleClass().add("background-layer");
         background.setMouseTransparent(true);
@@ -108,7 +108,7 @@ public class MediaPlayerApp extends Application {
         installKeyboardControls(scene);
         updatePlayPauseIcon(false);
 
-        stage.setTitle("Retro PLayer");
+        stage.setTitle("Retro Player");
         stage.setMinWidth(800);
         stage.setMinHeight(500);
         stage.setScene(scene);
