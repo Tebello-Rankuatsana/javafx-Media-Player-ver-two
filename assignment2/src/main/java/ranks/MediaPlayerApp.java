@@ -36,15 +36,15 @@ import java.util.List;
 public class MediaPlayerApp extends Application {
 
     // Icon paths. 
-    private static final String ICON_PLAY = "/images/play.png", 
-    ICON_PAUSE = "/images/pause.png", 
-    ICON_STOP = "/images/square.png", 
-    ICON_PREV = "/images/skip-back.png",
-    ICON_NEXT = "/images/skip-forward.png", 
-    ICON_MUTE = "/images/volume-off.png", 
-    ICON_UNMUTE = "/images/volume-2.png", 
-    ICON_ADD = "/images/plus.png", 
-    ICON_REMOVE = "/images/minus.png";
+    private static final String ICON_PLAY = "/images-two/play.png", 
+    ICON_PAUSE = "/images-two/pause.png", 
+    ICON_STOP = "/images-two/square.png", 
+    ICON_PREV = "/images-two/skip-back.png",
+    ICON_NEXT = "/images-two/skip-forward.png", 
+    ICON_MUTE = "/images-two/volume-off.png", 
+    ICON_UNMUTE = "/images-two/volume.png", 
+    ICON_ADD = "/images-two/plus.png", 
+    ICON_REMOVE = "/images-two/minus.png";
 
     // Background image shown behind the entire UI
     private static final String BACKGROUND_IMAGE = "";  
