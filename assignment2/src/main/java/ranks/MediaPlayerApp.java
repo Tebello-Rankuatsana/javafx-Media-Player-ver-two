@@ -49,7 +49,7 @@ public class MediaPlayerApp extends Application {
     // Background image shown behind the entire UI
     private static final String BACKGROUND_IMAGE = "";  
 
-    // Fallback glyphs used when the icon path above is empty 
+    // Fallback glyphs used when the icon path is empty 
     private static final String GLYPH_PLAY = "\u25B6", GLYPH_PAUSE = "\u23F8", GLYPH_STOP = "\u23F9",
             GLYPH_PREV = "\u23EE", GLYPH_NEXT = "\u23ED", GLYPH_MUTE = "\uD83D\uDD07",
             GLYPH_UNMUTE = "\uD83D\uDD0A", GLYPH_ADD = "+", GLYPH_REMOVE = "\u2212";
@@ -286,7 +286,7 @@ public class MediaPlayerApp extends Application {
         }
     }
 
-    // Accepts a plain file path, a file: URL, or a classpath resource.
+    // Accepts a plain file path, a file URL, or a classpath resource.
     private static String resolveUrl(String path) {
         if (path == null || path.trim().isEmpty()) return null;
         String p = path.trim();
@@ -325,6 +325,7 @@ public class MediaPlayerApp extends Application {
         });
     }
 
+    // handling play logic 
     private void playIndex(int index) {
         if (index < 0 || index >= playlist.size()) return;
         final File file = playlist.get(index);
@@ -411,6 +412,7 @@ public class MediaPlayerApp extends Application {
         playlistView.refresh();
     }
 
+    // pausing logic
     private void togglePlayPause() {
         if (player == null) {
             if (playlist.isEmpty()) {
@@ -430,6 +432,7 @@ public class MediaPlayerApp extends Application {
         }
     }
 
+    // stopping logic
     private void stopPlayback() {
         if (player == null) return;
         player.stop();
@@ -437,24 +440,24 @@ public class MediaPlayerApp extends Application {
         updateTimeLabel(Duration.ZERO);
         statusLabel.setText("Stopped");
     }
-
+// next and previous logic
     private void next() {
         if (playlist.isEmpty()) return;
         playIndex((currentIndex + 1) % playlist.size());
     }
-
+    // previous logic
     private void previous() {
         if (playlist.isEmpty()) return;
         playIndex(currentIndex <= 0 ? playlist.size() - 1 : currentIndex - 1);
     }
-
+    // volume logic
     private void changeVolume(double delta) {
         double v = Math.max(0, Math.min(1, volumeSlider.getValue() + delta));
         volumeSlider.setValue(v);
         if (muted && delta > 0) toggleMute();
         statusLabel.setText("Volume: " + Math.round(v * 100) + "%");
     }
-
+    // mute logic
     private void toggleMute() {
         muted = !muted;
         if (player != null) player.setMute(muted);
@@ -462,7 +465,7 @@ public class MediaPlayerApp extends Application {
         muteButton.setTooltip(new Tooltip(muted ? "Unmute (M)" : "Mute (M)"));
         statusLabel.setText(muted ? "Muted" : "Unmuted");
     }
-
+    // seek logic
     private void seekBy(double seconds) {
         if (player == null) return;
         Duration total = player.getTotalDuration();
@@ -486,7 +489,7 @@ public class MediaPlayerApp extends Application {
         updateTimeLabel(Duration.ZERO);
         updatePlayPauseIcon(false);
     }
-
+    // logic for choosing files to add to the playlist
     private void addFiles() {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Add media files");
@@ -506,7 +509,7 @@ public class MediaPlayerApp extends Application {
         statusLabel.setText("Added " + files.size() + " file(s) to the playlist");
         if (wasEmpty || player == null) playIndex(firstNew);
     }
-
+    // removing media from the playlist
     private void removeSelected() {
         int selected = playlistView.getSelectionModel().getSelectedIndex();
         if (selected < 0) {
